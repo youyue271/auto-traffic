@@ -1,0 +1,505 @@
+/* 移除所有滚动条 */
+::-webkit-scrollbar {
+    display: none;
+}
+
+body, html {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    overflow: hidden;
+}
+
+/* 布局容器 */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+}
+
+/* 面板基础样式 */
+.panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.panel-content {
+    height: 100%;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+/* 顶部面板 */
+.top-panel {
+    height: 27vh;
+    border-bottom: 1px solid #dee2e6;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* 底部面板 */
+.bottom-panel {
+    flex: 1;
+    overflow: hidden;
+}
+
+/* 左侧选项卡 */
+.left-tabs-container {
+    position: relative;
+    width: 12%;
+    padding: 15px;
+    background-color: white;
+    border-right: 1px solid #dee2e6;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.left-tabs {
+    height: 100%;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+/* 右侧内容区域 */
+.tab-content-container {
+    padding: 20px;
+    overflow: hidden; /* 移除滚动条 */
+    background-color: #f8f9fa;
+}
+
+/* 选项卡样式 */
+.tab-pane {
+    display: none;
+    height: 100%;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.nav-tabs .nav-link {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    color: #495057;
+    transition: all 0.3s;
+    background-color: #f8f9fa;
+    white-space: nowrap; /* 防止文本换行 */
+    overflow: hidden; /* 移除滚动条 */
+    text-overflow: ellipsis; /* 文本溢出显示省略号 */
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #e9ecef;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3);
+}
+
+/* 文件信息卡片 */
+.file-info-card {
+    height: 100%;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.file-input-container {
+    position: relative;
+    height: 100%;
+}
+
+.file-drop-area {
+    border: 2px dashed #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.file-drop-area:hover, .file-drop-area.drag-over {
+    border-color: #0d6efd;
+    background-color: #e9ecef;
+}
+
+.file-drop-area i {
+    font-size: 2rem;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.file-info-display {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.file-info-row {
+    display: flex;
+    margin-bottom: 5px;
+    white-space: nowrap; /* 防止文本换行 */
+    overflow: hidden; /* 移除滚动条 */
+    text-overflow: ellipsis; /* 文本溢出显示省略号 */
+}
+
+.file-info-label {
+    font-weight: 500;
+    width: 100px;
+    color: #6c757d;
+    flex-shrink: 0; /* 防止标签被压缩 */
+}
+
+.file-info-value {
+    flex: 1;
+    overflow: hidden; /* 移除滚动条 */
+    text-overflow: ellipsis; /* 文本溢出显示省略号 */
+}
+
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+}
+
+.tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.refresh-btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+}
+
+.analysis-card {
+    transition: transform 0.2s;
+    margin-bottom: 15px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    height: 100%;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.analysis-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.protocol-badge {
+    font-size: 0.85em;
+    padding: 0.35em 0.65em;
+}
+
+.detection-badge {
+    font-size: 0.8em;
+    padding: 0.3em 0.6em;
+}
+
+/* 调整大小手柄样式 */
+.panel-resizer {
+    position: absolute;
+    background-color: transparent;
+    z-index: 10;
+    transition: background-color 0.2s;
+}
+
+.panel-resizer:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.horizontal-resizer {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    cursor: row-resize;
+}
+
+.vertical-resizer {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 5px;
+    cursor: col-resize;
+}
+
+/* 表格样式 */
+.table-container {
+    height: calc(100% - 60px); /* 减去标题高度 */
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.table-responsive {
+    height: 100%;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.table {
+    width: 100%;
+    table-layout: fixed; /* 固定表格布局 */
+    margin-bottom: 0;
+}
+
+.table th, .table td {
+    white-space: nowrap; /* 防止文本换行 */
+    overflow: hidden; /* 移除滚动条 */
+    text-overflow: ellipsis; /* 文本溢出显示省略号 */
+}
+
+/* 图表容器 */
+.chart-container {
+    height: 300px;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+/* 文件网格 */
+.file-grid-container {
+    height: calc(100% - 60px); /* 减去标题高度 */
+    overflow: hidden; /* 移除滚动条 */
+}
+
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    height: 100%;
+    overflow: hidden; /* 移除滚动条 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .top-panel {
+        height: 150px;
+    }
+
+    .left-tabs-container {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .tab-content-container {
+        width: 100%;
+    }
+
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
+
+/* 折叠按钮样式 */
+.collapse-btn {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    width: 30px;
+    height: 15px;
+    background-color: #0d6efd;
+    color: white;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s;
+}
+
+.collapse-btn:hover {
+    background-color: #0b5ed7;
+}
+
+.collapse-btn i {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+.collapsed .collapse-btn i {
+    transform: rotate(180deg);
+}
+
+/* 顶部栏折叠状态 */
+.top-panel.collapsed {
+    height: 0 !important;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+}
+
+.top-panel.collapsed .panel-content {
+    display: none;
+}
+
+/* 边界限制提示 */
+.resize-boundary {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.01);
+    z-index: 15;
+    display: none;
+}
+
+.horizontal-boundary {
+    height: 5px;
+    left: 0;
+    right: 0;
+}
+
+.vertical-boundary {
+    width: 5px;
+    top: 0;
+    bottom: 0;
+}
+
+/* 调整大小手柄的边界提示 */
+.panel-resizer.at-boundary {
+    background-color: rgba(255, 0, 0, 0.01);
+}
+
+/* 右侧内容区域自适应 */
+.tab-content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tab-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.tab-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* 内容区域自适应布局 */
+.content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* 卡片组自适应 */
+.card-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    overflow: hidden;
+}
+
+.card-grid-item {
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* 修复flex布局中的高度问题 */
+}
+
+.card-grid-item > .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* 修复flex布局中的高度问题 */
+}
+
+.card-grid-item .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* 图表容器自适应 */
+.chart-container {
+    flex: 1;
+    min-height: 300px;
+    position: relative;
+}
+
+/* 表格容器自适应 */
+.table-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.table-responsive {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.table-responsive .table {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+/* 文件网格自适应 */
+.file-grid-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.file-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+    overflow: auto;
+    padding-bottom: 15px;
+}
+
+/* 移除滚动条 */
+.file-grid::-webkit-scrollbar {
+    display: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+    .card-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 992px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .file-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
