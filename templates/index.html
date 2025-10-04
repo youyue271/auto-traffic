@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="layout-container">
+    <!-- 顶部面板 -->
+    <div class="panel top-panel" id="top-panel">
+        <div class="panel-content">
+            <div class="row h-100">
+                <div class="col-md-3">
+                    <div class="card h-100 file-info-card">
+                        <div class="card-body file-input-container">
+                            <div class="file-drop-area" id="file-drop-area">
+                                <i class="bi bi-cloud-arrow-up"></i>
+                                <p class="mb-1">拖放PCAP文件到此处</p>
+                                <small class="text-muted">或点击选择文件</small>
+                                <input type="file" id="file-input" accept=".pcap,.pcapng" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card h-100 file-info-card">
+                        <div class="card-body file-info-display">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">文件信息</h5>
+                                <span class="status-badge bg-info" id="analysis-status">等待文件</span>
+                            </div>
+
+                            <div class="file-info-row">
+                                <span class="file-info-label">文件名</span>
+                                <span class="file-info-value" id="file-name">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span class="file-info-label">文件大小</span>
+                                <span class="file-info-value" id="file-size">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span class="file-info-label">修改时间</span>
+                                <span class="file-info-value" id="file-modified">-</span>
+                            </div>
+                            <div class="file-info-row">
+                                <span class="file-info-label">数据包数量</span>
+                                <span class="file-info-value" id="packet-count">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-resizer horizontal-resizer" data-panel="top-panel"></div>
+        <div class="collapse-btn" id="collapse-top-btn">
+            <i class="bi bi-chevron-up"></i>
+        </div>
+    </div>
+
+    <!-- 底部面板 -->
+    <div class="panel bottom-panel" id="bottom-panel">
+        <div class="panel-content">
+            <div class="row h-100">
+                <!-- 左侧选项卡 -->
+                <div class="col-md-3 left-tabs-container" id="left-tabs">
+                    <div class="left-tabs">
+                        <ul class="nav nav-tabs flex-column" id="analysis-tabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="protocol-tab" data-bs-toggle="tab"
+                                        data-bs-target="#protocol-content" type="button" role="tab">
+                                    <i class="bi bi-pie-chart me-2"></i>协议统计
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="sql-tab" data-bs-toggle="tab"
+                                        data-bs-target="#sql-content" type="button" role="tab">
+                                    <i class="bi bi-shield-shaded me-2"></i>SQL注入检测
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="file-tab" data-bs-toggle="tab"
+                                        data-bs-target="#file-content" type="button" role="tab">
+                                    <i class="bi bi-file-earmark-arrow-down me-2"></i>文件提取
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="traffic-tab" data-bs-toggle="tab"
+                                        data-bs-target="#traffic-content" type="button" role="tab">
+                                    <i class="bi bi-graph-up me-2"></i>流量分析
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="custom-tab" data-bs-toggle="tab"
+                                        data-bs-target="#custom-content" type="button" role="tab">
+                                    <i class="bi bi-gear me-2"></i>自定义分析
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-resizer vertical-resizer" data-panel="left-tabs"></div>
+                    <div class="collapse-btn" id="collapse-left-btn">
+                        <i class="bi bi-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- 右侧内容区域 -->
+                <div class="col-md-9 tab-content-container" id="tab-content">
+                    <div class="tab-content" id="analysis-content">
+                        <!-- 使用部分模板加载各选项卡内容 -->
+                        {% include 'partials/protocol_stats.html' %}
+                        {% include 'partials/sql_injection.html' %}
+                        {% include 'partials/file_extraction.html' %}
+                        {% include 'partials/traffic_analysis.html' %}
+                        {% include 'partials/custom_analysis.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
